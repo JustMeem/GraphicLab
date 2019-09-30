@@ -5,9 +5,11 @@ import java.awt.*;
 public class Point extends Figure {
     private int x, y;
 
-    public Point(int x, int y) {
+    public Point(int x, int y, int boundX, int boundY) {
         this.x = x;
         this.y = y;
+        this.boundY = boundY;
+        this.boundX = boundX;
         dx = dy = 0;
     }
 
@@ -17,35 +19,20 @@ public class Point extends Figure {
         double sin = Math.sin(a);
         int x = (int) Math.round(this.x * cos - this.y * sin);
         int y = (int) Math.round(this.x * sin + this.y * cos);
-    }
-
-    public void rotate(Point base, double a) {
-        rotate(base, Math.sin(a), Math.cos(a));
-    }
-
-    public void rotate(Point base, double sin, double cos) {
-        int x = base.x + (int) Math.round((this.x - base.x) * cos - (this.y - base.y) * sin);
-        int y = base.y + (int) Math.round((this.x - base.x) * sin + (this.y - base.y) * cos);
         this.x = x;
         this.y = y;
     }
 
-    public void move() {
-        this.x += dx;
-        this.y += dy;
-    }
 
-    public void move(int x, int y, int maxX, int maxY) {
-        if (this.x + x > maxX) {
-            this.x = 2 * maxX - (this.x + x);
-        } else {
-            this.x += x;
+    public void move() {
+        if (x + dx > boundX || x + dx < 0) {
+            dx = -dx;
         }
-        if (this.y + y > maxY) {
-            this.y = 2 * maxY - (this.y + y);
-        } else {
-            this.y += y;
+        if (y + dy > boundY || y + dy < 0) {
+            dy = -dy;
         }
+        x += dx;
+        y += dy;
     }
 
     @Override

@@ -18,7 +18,8 @@ public class Circle extends Figure {
     }
 
     @Override
-    public void rotate(double a) {}
+    public void rotate(double a) {
+    }
 
     @Override
     public void move() {
@@ -30,8 +31,5 @@ public class Circle extends Figure {
         c.setVector(dx, dy);
     }
 
-    @Override
-    public void move(int x, int y, int maxX, int maxY) {
-        c.move(x, y, maxX, maxY);
-    }
+
 }
