@@ -6,8 +6,11 @@ import java.util.Random;
 
 public class Main {
 
-    private static final int WIDTH = 800;
+    private static final int WIDTH = 500;
     private static final int P_COUNT = 20;
+    public static int rnd(Random r){
+        return Math.abs(r.nextInt()%WIDTH);
+    }
 
 
     public static void main(String[] args) {
@@ -16,19 +19,19 @@ public class Main {
         frame.setSize(WIDTH, WIDTH);
 
         MyPanel canvas = new MyPanel();
-        Random rand = new Random(System.currentTimeMillis());
-        ArrayList<Point> points = new ArrayList<>(P_COUNT);
-        for (int i = 0; i < P_COUNT; i++) {
-            points.add(new Point(Math.abs(rand.nextInt() % WIDTH), Math.abs(rand.nextInt() % WIDTH)));
-        }
-        int[] dx = new int[P_COUNT];
-        int[] dy = new int[P_COUNT];
-        for (int i = 0; i < P_COUNT; i++) {
-            dx[i] = rand.nextInt() % 10;
-            dy[i] = rand.nextInt() % 10;
-        }
-        points.forEach(canvas::addDrawable);
+        Random r = new Random(System.currentTimeMillis());
+
         frame.add(canvas);
+        Figure[] figures = new Figure[5];
+        figures[0] = new Line(rnd(r), rnd(r), rnd(r), rnd(r), WIDTH, WIDTH);
+        figures[1] = new Circle(10, new Point(rnd(r), rnd(r), WIDTH, WIDTH));
+        figures[2] = new Ellipse(new Point(rnd(r), rnd(r), WIDTH, WIDTH), 10, 30);
+        figures[3] = new Rectangle(rnd(r), rnd(r), 20, 20, WIDTH, WIDTH);
+        figures[4] = new Polygon(new int[]{10, 30, 100, 80}, new int[]{10, 30, 35, 80}, WIDTH, WIDTH);
+        for (Figure f: figures){
+            f.setVector(r.nextInt()%10, r.nextInt()%10);
+            canvas.addDrawable(f);
+        }
         canvas.setRunning(true);
         frame.setVisible(true);
         Thread thread = new Thread() {
@@ -36,28 +39,11 @@ public class Main {
             public void run() {
                 super.run();
                 while (true) {
-                    for (int i = 0; i < P_COUNT; i++) {
-                        Point point = points.get(i);
-                        try {
-                            sleep(1);
-                        } catch (InterruptedException e) {
-                            break;
-                        }
-                        synchronized (point) {
-                            /*try {
-                                point.wait(1);
-                            } catch (InterruptedException e) {
-                            }*/
-                            if (point.getX() + dx[i] > WIDTH || point.getX() + dx[i] < 0) {
-                                dx[i] = -dx[i];
-                            }
-                            if (point.getY() + dy[i] > WIDTH || point.getY() + dy[i] < 0) {
-                                dy[i] = -dy[i];
-                            }
-                            point.move(dx[i], dy[i]);
-                        }
+                    try{sleep(10);}catch (InterruptedException e){break;}
+                    for (Figure f: figures){
+                        f.move();
+                        f.rotate(0.1);
                     }
-
                 }
             }
         };

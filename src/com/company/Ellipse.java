@@ -2,7 +2,7 @@ package com.company;
 
 import java.awt.*;
 
-public class Ellipse extends Figure implements Drawable {
+public class Ellipse extends Figure{
     private Point center;
     private int height, width;
     private double angle;

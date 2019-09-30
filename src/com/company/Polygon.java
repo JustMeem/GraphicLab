@@ -2,7 +2,7 @@ package com.company;
 
 import java.awt.*;
 
-public class Polygon extends Figure implements Drawable {
+public class Polygon extends Figure {
     private int[] x, y;
     private double angle = 0;
 

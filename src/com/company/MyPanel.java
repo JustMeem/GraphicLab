@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.Path2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +36,6 @@ public class MyPanel extends JPanel implements ActionListener {
         g.setColor(Color.white);
         g.fillRect(0, 0, getWidth(), getHeight());
         g.setColor(Color.red);
-        g.drawRect(0, 0, getWidth(), getHeight());
         
         for (Drawable d : drawables) {
             synchronized (d) {
