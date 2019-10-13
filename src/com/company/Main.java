@@ -24,10 +24,10 @@ public class Main {
         frame.add(canvas);
         Figure[] figures = new Figure[5];
         figures[0] = new Line(rnd(r), rnd(r), rnd(r), rnd(r), WIDTH, WIDTH);
-        figures[1] = new Circle(10, new Point(rnd(r), rnd(r), WIDTH, WIDTH));
+        figures[1] = new Circle(40, new Point(rnd(r), rnd(r), WIDTH, WIDTH));
         figures[2] = new Ellipse(new Point(rnd(r), rnd(r), WIDTH, WIDTH), 10, 30);
         figures[3] = new Rectangle(rnd(r), rnd(r), 20, 20, WIDTH, WIDTH);
-        figures[4] = new Polygon(new int[]{10, 30, 100, 80}, new int[]{10, 30, 35, 80}, WIDTH, WIDTH);
+        figures[4] = new Polygon(new int[]{10, 40, 40}, new int[]{10, 10, 50}, WIDTH, WIDTH);
         for (Figure f: figures){
             f.setVector(r.nextInt()%10, r.nextInt()%10);
             canvas.addDrawable(f);
@@ -42,7 +42,7 @@ public class Main {
                     try{sleep(10);}catch (InterruptedException e){break;}
                     for (Figure f: figures){
                         f.move();
-                        f.rotate(0.1);
+                        f.rotate(0.05);
                     }
                 }
             }
