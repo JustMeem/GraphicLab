@@ -31,9 +31,10 @@ public class Ellipse extends Figure{
     @Override
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D)g;
-        int x = center.getX(), y = center.getY();
+        int x = center.getX() , y = center.getY();
         g2.rotate(angle, x, y);
-        g2.fillOval(x, y, width, height);
+        g2.fillOval(x - width/2, y  - height/2, width, height);
+        //center.draw((Graphics) g2);
         g2.rotate(-angle, x, y);
     }
 }

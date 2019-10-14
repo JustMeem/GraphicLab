@@ -14,7 +14,7 @@ public class Circle extends Figure {
 
     @Override
     public void draw(Graphics g) {
-        g.fillOval(c.getX(), c.getY(), rad, rad);
+        g.fillOval(c.getX() - rad, c.getY() - rad, rad * 2, rad * 2);
     }
 
     @Override

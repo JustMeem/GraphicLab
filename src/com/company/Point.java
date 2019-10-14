@@ -37,7 +37,7 @@ public class Point extends Figure {
 
     @Override
     public void draw(Graphics g) {
-        g.fillRect(x, y, 3, 3);
+        g.fillRect(x, y, 5, 5);
     }
 
     public int getX() {
